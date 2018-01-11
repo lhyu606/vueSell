@@ -1,11 +1,15 @@
 <template>
-	<h3>header header header....</h3>
+	<div>
+		<h3>goods</h3>
+		<hr>
+		
+	</div>
 </template>
 
 <script type="ecmascript-6">
 	
 </script>
 
-<style lang="" rel="stylesheet/style">
+<style>
 	
 </style>
