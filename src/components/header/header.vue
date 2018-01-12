@@ -54,6 +54,7 @@
 	@import "../../common/stylus/icon.styl"
 	.header
 		position: relative
+		overflow: hidden
 		color: #fff
 		background: rgba(7,17,27,0.5)
 		.content-wrapper
