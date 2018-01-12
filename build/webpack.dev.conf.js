@@ -85,18 +85,21 @@ var seller = appData.seller;
 var goods = appData.goods;
 var ratings = ratings;
 apiRoutes.get('/seller',function(req,res){
+	res.header("Access-Control-Allow-Origin", "*"); 
   res.json({
     errno: 0,
     data: seller
   })
 })
 apiRoutes.get('/goods',function(req,res){
+	res.header("Access-Control-Allow-Origin", "*"); 
   res.json({
     errno: 0,
     data: goods
   })
 })
 apiRoutes.get('/ratings',function(req,res){
+	res.header("Access-Control-Allow-Origin", "*"); 
   res.json({
     errno: 0,
     data: ratings
