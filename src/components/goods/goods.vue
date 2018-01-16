@@ -28,12 +28,16 @@
 									<span class="now">&yen;{{ food.price }}</span>
 									<span v-show="food.oldPrice" class="old">&yen;{{ food.oldPrice }}</span>
 								</div>
+								<div class="cartcontrol-wrapper">
+									<cartcontrol :food="food"></cartcontrol>
+								</div>
 							</div>
 						</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
+		<shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
 	</div>
 	
 </template>
@@ -41,6 +45,8 @@
 <script type="ecmascript-6">
 	/* eslint-disable */
 	import BScroll from 'better-scroll'
+	import shopcart from '@/components/shopcart/shopcart.vue'
+	import cartcontrol from '@/components/cartcontrol/cartcontrol.vue'
 	const ERR_OK = 0;
 	export default {
 		props: {
@@ -65,6 +71,17 @@
 					}
 				}
 				return 0;
+			},
+			selectFoods() {
+				let foods = [];
+				this.goods.forEach((good) => {
+					good.foods.forEach((food) => {
+						if (food.count){
+							foods.push(food);
+						}
+					})
+				})
+				return foods;
 			}
 		},
 		created() {
@@ -86,11 +103,11 @@
 					click: true
 				});
 				this.foodScroll = new BScroll(this.$refs.foodsWrapper,{
-					probeType: 3
+					probeType: 3,
+					click: true
 				});
 				this.foodScroll.on('scroll',(pos) => {
 					this.scrollY = Math.abs(Math.round(pos.y));
-					console.log(this.scrollY)
 				})
 			},
 			_calcHeight() {
@@ -111,9 +128,11 @@
 				let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook')
 				let el = foodList[index];
 				this.foodScroll.scrollToElement(el,300);
-				console.log(index)
-				console.log(event)
 			}
+		},
+		components:{
+			shopcart,
+			cartcontrol
 		}
 	}
 </script>
@@ -219,5 +238,8 @@
 							text-decoration: line-through
 							font-size: 10px
 							color: rgb(147,153,159)
-
+					.cartcontrol-wrapper
+						position: absolute
+						right: 0
+						bottom: 12px
 </style>
