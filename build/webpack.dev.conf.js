@@ -83,7 +83,7 @@ var apiRoutes = express.Router()
 var appData = require('../data.json')
 var seller = appData.seller;
 var goods = appData.goods;
-var ratings = ratings;
+var ratings = appData.ratings;
 apiRoutes.get('/seller',function(req,res){
 	res.header("Access-Control-Allow-Origin", "*"); 
   res.json({
