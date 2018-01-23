@@ -12,29 +12,37 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive  v-if="$route.meta.keepAlive">
+    	<router-view :seller="seller" keep-alive></router-view>
+    </keep-alive>
+    
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 	/* eslint-disable */
 import header from '@/components/header/header.vue'
+import {urlParse} from '@/common/js/util.js'
 
 const ERR_OK = 0;
 export default {
   name: 'app',
   data () {
   	return {
-  		seller: {}
+  		seller: {
+  			id: (() => {
+  				let queryParam = urlParse();
+  				return queryParam.id;
+  			})()
+  		}
   	}
   },
   created() {
-  	this.$http.get('http://localhost:808/api/seller').then((res) => {
-  		console.log(res)
+  	this.$http.get('http://localhost:808/api/seller?id=12345').then((res) => {
   		res = res.body;
   		if (res.errno === ERR_OK){
-  			this.seller = res.data;
-  			console.dir(this.seller)
+  			this.seller = Object.assign({},this.seller,res.data);
+  			//this.seller = res.data;
   		}
   	})
   },

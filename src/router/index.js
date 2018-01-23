@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue'
 import Router from 'vue-router'
 import Resource from 'vue-resource'
@@ -16,15 +17,18 @@ export default new Router({
     }, {
       path: '/seller',
       name: 'seller',
-      component: seller
+      component: seller,
+      meta:{keepAlive: true}
     }, {
       path: '/goods',
       name: 'goods',
-      component: goods
+      component: goods,
+      meta:{keepAlive: true}
     }, {
       path: '/ratings',
       name: 'ratings',
-      component: ratings
+      component: ratings,
+      meta:{keepAlive: true}
     }
   ],
   linkActiveClass: 'active'

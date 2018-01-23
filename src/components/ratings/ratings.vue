@@ -94,7 +94,7 @@
 			this.$http.get('http://localhost:808/api/ratings').then((res) => {
 				res = res.body;
 				if(res.errno === ERR_OK){
-					this.ratings = res.data;console.log(res)
+					this.ratings = res.data;
 					this.$nextTick(()=>{
 						this.scroll = new BScroll(this.$refs.ratings,{
 							probeType: 3,
