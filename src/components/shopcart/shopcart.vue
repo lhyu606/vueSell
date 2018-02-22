@@ -15,7 +15,7 @@
 					&yen; {{ totalPrice }} 元
 				</div>
 				<div class="desc">
-					另需配送费&yen; {{ deliveryPrice }} 元
+					配送费&yen; {{ deliveryPrice }} 元
 				</div>
 			</div>
 			<div class="content-right" @click.stop.prevent="pay">
@@ -320,7 +320,7 @@
 					display: inline-block
 					vertical-align: top
 					margin: 12px 0 0 4px
-					font-size: 14px
+					font-size: 12px
 					line-height: 24px
 			.content-right
 				flex: 0 0  105px
