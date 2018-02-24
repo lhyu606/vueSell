@@ -1,11 +1,11 @@
 <template>
 	<div class="ratingselect" >
 		<div class="rating-type border-1px">
-			<span @click="select(2,$event)" class="block positive" :class="{'active':selectTypeData===2}">{{ desc.all }}<span class="count">{{ratings.length}}</span></span>
-			<span @click="select(0,$event)" class="block positive" :class="{'active':selectTypeData===0}">{{ desc.positive }}<span class="count">{{ positives.length }}</span></span>
-			<span @click="select(1,$event)" class="block negative" :class="{'active':selectTypeData===1}">{{ desc.negative }}<span class="count">{{ negatives.length }}</span></span>
+			<span @click="select(2,$event)" class="block positive" :class="{'active':selectType===2}">{{ desc.all }}<span class="count">{{ratings.length}}</span></span>
+			<span @click="select(0,$event)" class="block positive" :class="{'active':selectType===0}">{{ desc.positive }}<span class="count">{{ positives.length }}</span></span>
+			<span @click="select(1,$event)" class="block negative" :class="{'active':selectType===1}">{{ desc.negative }}<span class="count">{{ negatives.length }}</span></span>
 		</div>
-		<div class="switch" @click="toggleContent" :class="{'on':onlyContentData}">
+		<div class="switch" @click="toggleContent" :class="{'on':onlyContent}">
 			<i class="icon-check_circle"></i>
 			<span class="text">只看有内容的评价</span>
 		</div>
@@ -25,14 +25,10 @@
 					return [];
 				}
 			},
-			selectType: {
-				type: Number,
-				default: ALL
-			},
-			onlyContent: {
-				type: Boolean,
-				default: false
-			},
+			// selectType: {
+			// 	type: Number,
+			// 	default: ALL
+			// },
 			desc: {
 				type: Object,
 				default() {
@@ -46,11 +42,17 @@
 		},
 		data() {
 			return {
-				onlyContentData:this.onlyContent,
 				selectTypeData:this.selectType
 			}
 		},
 		computed: {
+
+			onlyContent () {
+		      return this.$store.state.onlyContent
+		    },
+		    selectType () {
+		    	return this.$store.state.selectType
+		    },
 			positives(){
 				return this.ratings.filter((rating) => {
 					return rating.rateType === POSITIVE;
@@ -67,14 +69,14 @@
 				if(!event._constructed){
 					return;
 				}
-				this.selectTypeData = type;
+				this.$store.commit('toggleSelectType',type);
 				this.$emit('ratingtypeselect',type);
 			},
 			toggleContent(){
 				if(!event._constructed){
 					return;
 				}
-				this.onlyContentData = !this.onlyContentData;
+				this.$store.commit('toggleOnlyContent');
 				this.$emit('contenttoggle',this.onlyContentData);
 			}
 		}

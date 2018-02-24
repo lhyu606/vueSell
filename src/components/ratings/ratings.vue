@@ -31,7 +31,6 @@
 			<split></split>
 			<ratingselect 
 				:selectType="selectType" 
-				:onlyContent="onlyContent"
 				:ratings="ratings"
 				v-on:ratingtypeselect="_ratingtypeSelect"
 				v-on:contenttoggle="_contentToggle"></ratingselect>
@@ -82,11 +81,17 @@
 				type: Object
 			}
 		},
+		computed: {
+			onlyContent () {
+		    	return this.$store.state.onlyContent
+			},
+			selectType () {
+		    	return this.$store.state.selectType
+		    },
+		},
 		data() {
 			return {
 				showFlag: false,
-				selectType: ALL,
-				onlyContent: true,
 				ratings: []
 			}
 		},
@@ -116,13 +121,12 @@
 				}
 			},
 			_ratingtypeSelect(type) {
-				this.selectType = type;
+				// this.selectType = type;
 				this.$nextTick(() => {
 					this.scroll.refresh();
 				});
 			},
 			_contentToggle(onlyContent) {
-				this.onlyContent = onlyContent;
 				this.$nextTick(() => {
 					this.scroll.refresh();
 				});
