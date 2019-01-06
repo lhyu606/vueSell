@@ -38,13 +38,21 @@ export default {
   	}
   },
   created() {
-  	this.$http.get('http://localhost:808/api/seller?id=12345').then((res) => {
-  		res = res.body;
-  		if (res.errno === ERR_OK){
-  			this.seller = Object.assign({},this.seller,res.data);
-  			//this.seller = res.data;
-  		}
-  	})
+    // 使用 resource 请求数据
+  	// this.$http.get('http://localhost:808/api/seller?id=12345').then((res) => {
+  	// 	res = res.body;
+  	// 	if (res.errno === ERR_OK){
+  	// 		this.seller = Object.assign({},this.seller,res.data);
+  	// 		//this.seller = res.data;
+  	// 	}
+  	// })
+    // 使用 resource 请求数据
+
+    // 模拟请求数据（实为本地数据）
+    this.$store.dispatch('getSeller').then(() => {
+      this.seller = this.$store.state.seller; 
+    });    
+    // 模拟请求数据（实为本地数据）
   },
   components: {
     'v-header': header

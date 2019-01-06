@@ -90,7 +90,8 @@
 		},
 		created() {
 			this.classMap = ['decrease','discount','special','invoice','guarantee'];
-			this.$http.get('http://localhost:808/api/goods').then((res) => {
+			// 使用 resource 请求数据
+			/*this.$http.get('http://localhost:808/api/goods').then((res) => {
 				res = res.body;
 				if(res.errno === ERR_OK){
 					this.goods = res.data;
@@ -99,7 +100,17 @@
 						this._calcHeight();
 					})
 				}
-			});
+			});*/
+			// 使用 resource 请求数据
+			// 模拟请求数据（实为本地数据）
+			this.$store.dispatch('getGoods').then(() => {
+		      this.goods = this.$store.state.goods; 
+		      	this.$nextTick(()=>{
+					this._initScroll();
+					this._calcHeight();
+				})
+		    }); 
+			// 模拟请求数据（实为本地数据）
 		},
 		methods: {
 			_drop(el) {

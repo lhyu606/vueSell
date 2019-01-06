@@ -96,7 +96,8 @@
 			}
 		},
 		created() {
-			this.$http.get('http://localhost:808/api/ratings').then((res) => {
+			// 使用 resource 请求数据
+			/*this.$http.get('http://localhost:808/api/ratings').then((res) => {
 				res = res.body;
 				if(res.errno === ERR_OK){
 					this.ratings = res.data;
@@ -107,7 +108,19 @@
 						});
 					})
 				}
-			});
+			});*/
+			// 使用 resource 请求数据
+			// 模拟请求数据（实为本地数据）
+			this.$store.dispatch('getRatings').then(() => {
+		      this.ratings = this.$store.state.ratings; 
+		      	this.$nextTick(()=>{
+					this.scroll = new BScroll(this.$refs.ratings,{
+						probeType: 3,
+						click: true
+					});
+				});
+		    }); 
+			// 模拟请求数据（实为本地数据）
 		},
 		methods:{
 			needShow(type,text) {
