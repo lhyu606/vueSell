@@ -38,6 +38,9 @@ export default {
   	}
   },
   created() {
+    // 移除首屏加载动画
+    document.body.removeChild(document.getElementById('Loading'));
+
     // 使用 resource 请求数据
   	// this.$http.get('http://localhost:808/api/seller?id=12345').then((res) => {
   	// 	res = res.body;
