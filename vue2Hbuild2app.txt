@@ -1,0 +1,19 @@
+
+在 config/index.js 中修改:
+
+build{
+  、、、
+  assetsPublicPath: './',
+  、、、
+}
+
+Hbuild 引入 dist 目录 重命名为 myapp （最终 apk 安装后的名称）
+
+导入后，右键点击项目选择【转换成移动 APP 】
+
+修改 index.html reset.css 引用路径为 ./static/css/reset.css
+
+将 app.[hash].css  和 app.[hash].css.map 中的  /static/font  改为  ../font  此类包含  @font-face 的错误路径改正
+
+【工具栏】上选择【发行】【发行为原装安装包】勾选【Android】【打包】等待打包完成下载即可
+
